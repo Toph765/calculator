@@ -1,9 +1,10 @@
 let numOne;
 let numTwo;
-let operator;
-let screen = [];
+let operator = ['add', 'subtract', 'multiply', 'divide'];
+let displayInput = [];
 const display = document.querySelector('.display');
-const numberButton = document.querySelectorAll('.numerical');
+const numberButtons = document.querySelectorAll('.numerical');
+const operatorButtons = document.querySelectorAll('.operator')
 
 // Create operator functions.
 
@@ -31,8 +32,12 @@ function operate(a, b, operator) {
 }
 
 // Button event listener
-numberButton.forEach(button => button.addEventListener('click', () => {
-    screen.push(button.getAttribute("value"));
-    display.textContent = screen.join('');
+numberButtons.forEach(button => button.addEventListener('click', () => {
+    displayInput.push(button.getAttribute("value"));
+    display.textContent = displayInput.join('');
 }))
 
+operatorButtons.forEach(button => button.addEventListener('click', () => {
+    displayInput.push(button.getAttribute("value"));
+    display.textContent = displayInput.join('');
+}))
