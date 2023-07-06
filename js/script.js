@@ -1,10 +1,12 @@
-let numOne;
-let numTwo;
+let numOne = [];
+let numTwo = [];
+let temp = [];
 let operator = ['add', 'subtract', 'multiply', 'divide'];
 let displayInput = [];
-const display = document.querySelector('.display');
+const operationDisplay = document.querySelector('.operationDisplay')
+const solutionDisplay = document.querySelector('.solutionDisplay');
 const numberButtons = document.querySelectorAll('.numerical');
-const operatorButtons = document.querySelectorAll('.operator')
+const operatorButtons = document.querySelectorAll('.operator');
 
 // Create operator functions.
 
@@ -33,11 +35,14 @@ function operate(a, b, operator) {
 
 // Button event listener
 numberButtons.forEach(button => button.addEventListener('click', () => {
-    displayInput.push(button.getAttribute("value"));
-    display.textContent = displayInput.join('');
+    temp.push(button.getAttribute("value"));
+    solutionDisplay.textContent = temp.join('');
 }))
 
+console.log(numOne)
+
 operatorButtons.forEach(button => button.addEventListener('click', () => {
+    operationDisplay.textContent = numOne;
     displayInput.push(button.getAttribute("value"));
-    display.textContent = displayInput.join('');
+    operationDisplay.textContent = displayInput;
 }))
