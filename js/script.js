@@ -1,3 +1,10 @@
+let numOne;
+let numTwo;
+let operator;
+let screen = [];
+const display = document.querySelector('.display');
+const numberButton = document.querySelectorAll('.numerical');
+
 // Create operator functions.
 
 function add(a, b) {
@@ -16,7 +23,16 @@ function divide(a, b) {
     return a / b
 }
 
-console.log(add(1, 1))
-console.log(subtract(2, 1))
-console.log(multiply(2, 3))
-console.log(divide(4, 2))
+function operate(a, b, operator) {
+    if (operator === "add") return add(a, b);
+    if (operator === "subtract") return subtract(a, b);
+    if (operator === "multiply") return multiply(a, b);
+    if (operator === "divide") return divide(a, b);
+}
+
+// Button event listener
+numberButton.forEach(button => button.addEventListener('click', () => {
+    screen.push(button.getAttribute("value"));
+    display.textContent = screen.join('');
+}))
+
