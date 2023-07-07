@@ -2,7 +2,7 @@ let numOne = [];
 let numTwo = [];
 let temp = [];
 let operator = ['add', 'subtract', 'multiply', 'divide'];
-let displayInput = [];
+let operation = [];
 const operationDisplay = document.querySelector('.operationDisplay')
 const solutionDisplay = document.querySelector('.solutionDisplay');
 const numberButtons = document.querySelectorAll('.numerical');
@@ -37,12 +37,13 @@ function operate(a, b, operator) {
 numberButtons.forEach(button => button.addEventListener('click', () => {
     temp.push(button.getAttribute("value"));
     solutionDisplay.textContent = temp.join('');
+    console.log(temp)
 }))
 
-console.log(numOne)
-
 operatorButtons.forEach(button => button.addEventListener('click', () => {
-    operationDisplay.textContent = numOne;
-    displayInput.push(button.getAttribute("value"));
-    operationDisplay.textContent = displayInput;
+    numOne = numOne.concat(temp);
+    operation.push(button.getAttribute('value'));
+    operationDisplay.textContent = `${numOne.join('')} ${operation}`;
+    operation.splice(0);
+    temp.splice(0);
 }))
