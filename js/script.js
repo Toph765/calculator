@@ -37,7 +37,6 @@ function operate(a, b, operator) {
 numberButtons.forEach(button => button.addEventListener('click', () => {
     temp.push(button.getAttribute("value"));
     solutionDisplay.textContent = temp.join('');
-    console.log(temp)
 }))
 
 operatorButtons.forEach(button => button.addEventListener('click', () => {
