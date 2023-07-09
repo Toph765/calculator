@@ -1,8 +1,8 @@
 let numOne = [];
 let numTwo = [];
 let temp = [];
-let operation = [];
-let operator = [];
+let operation = '';
+let operator = '';
 const operationDisplay = document.querySelector('.operationDisplay')
 const solutionDisplay = document.querySelector('.solutionDisplay');
 const numberButtons = document.querySelectorAll('.numerical');
@@ -44,33 +44,44 @@ numberButtons.forEach(button => button.addEventListener('click', () => {
 operatorButtons.forEach(button => button.addEventListener('click', () => {
     changeVar(temp);
     operator = button.getAttribute('value');
-    operation.push(button.textContent);
-    operationDisplay.textContent = `${numOne} ${operation} ${numTwo}`;
-    operation.splice(0);
+    operation = button.textContent;
+    operationDisplay.textContent = `${numOne} ${operation}`;
     console.log('numOne: ' + numOne, (typeof numOne));
+    console.log('numOne: ' + numOne, 'numTwo: ' + numTwo,'operator: ' + operator);
 }))
 
 equal.addEventListener('click', function() {
     if (numOne.length) {
-        numTwo = numTwo.concat(temp).join('');
+        numTwo = numTwo.concat(temp);
+        temp.splice(0);
         console.log('numTwo: ' + numTwo, (typeof numTwo));
         console.log('numOne: ' + numOne, 'numTwo: ' + numTwo,'operator: ' + operator);
     }
-    solutionDisplay.textContent = operate(parseInt(numOne), parseInt(numTwo), operator)
+    operationDisplay.textContent = `${numOne} ${operation} ${numTwo} =`;
+    solutionDisplay.textContent = operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operator);
 })
+
+clear.addEventListener('click', clearVar);
+
 
 // Functions
 function changeVar(item) {
     if (numOne.length) {
-        numTwo = numTwo.concat(item).join('');
-        item.splice(0)
+        numTwo = numTwo.concat(item);
+        item.splice(0);
     }
-    numOne = numOne.concat(item).join('');
+    numOne = numOne.concat(item);
     item.splice(0);
 }
 
-function clear() {
-    numOne = numOne.splice(0);
-    numTwo = numTwo.splice(0);
-    operator = operator.splice(0);
+function clearVar() {
+    numOne = [];
+    numTwo = [];
+    temp = [];
+    operator = '';
+    operation = '';
+    operationDisplay.textContent = '';
+    solutionDisplay.textContent = '';
+    console.log(typeof numOne, typeof numTwo, typeof operator)
+    console.log(numOne, numTwo)
 }
