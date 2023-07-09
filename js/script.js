@@ -52,13 +52,13 @@ operatorButtons.forEach(button => button.addEventListener('click', () => {
 
 equal.addEventListener('click', function() {
     if (numOne.length) {
-        numTwo = numTwo.concat(temp);
+        numTwo = numTwo.concat(temp).join('');
         temp.splice(0);
         console.log('numTwo: ' + numTwo, (typeof numTwo));
         console.log('numOne: ' + numOne, 'numTwo: ' + numTwo,'operator: ' + operator);
     }
     operationDisplay.textContent = `${numOne} ${operation} ${numTwo} =`;
-    solutionDisplay.textContent = operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operator);
+    solutionDisplay.textContent = operate(parseInt(numOne), parseInt(numTwo), operator);
 })
 
 clear.addEventListener('click', clearVar);
@@ -67,10 +67,10 @@ clear.addEventListener('click', clearVar);
 // Functions
 function changeVar(item) {
     if (numOne.length) {
-        numTwo = numTwo.concat(item);
+        numTwo = numTwo.concat(item).join('');
         item.splice(0);
     }
-    numOne = numOne.concat(item);
+    numOne = numOne.concat(item).join('');
     item.splice(0);
 }
 
