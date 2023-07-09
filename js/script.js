@@ -37,12 +37,22 @@ function operate(a, b, operator) {
 numberButtons.forEach(button => button.addEventListener('click', () => {
     temp.push(button.getAttribute("value"));
     solutionDisplay.textContent = temp.join('');
+    console.log('numOne: ' + numOne, 'temp: ' + temp);
 }))
 
 operatorButtons.forEach(button => button.addEventListener('click', () => {
-    numOne = numOne.concat(temp);
-    operation.push(button.getAttribute('value'));
-    operationDisplay.textContent = `${numOne.join('')} ${operation}`;
+    changeVar(temp);
+    operation.push(button.textContent);
+    operationDisplay.textContent = `${numOne.join('')} ${operation} ${numTwo.join('')}`;
     operation.splice(0);
-    temp.splice(0);
 }))
+
+function changeVar(item) {
+    if (numOne.length) {
+        numTwo = numTwo.concat(item);
+        item.splice(0)
+        console.log('numTwo:' + numTwo)
+    }
+    numOne = numOne.concat(item);
+    item.splice(0);
+}
