@@ -1,12 +1,14 @@
 let numOne = [];
 let numTwo = [];
 let temp = [];
-let operator = ['add', 'subtract', 'multiply', 'divide'];
 let operation = [];
+let operator = [];
 const operationDisplay = document.querySelector('.operationDisplay')
 const solutionDisplay = document.querySelector('.solutionDisplay');
 const numberButtons = document.querySelectorAll('.numerical');
 const operatorButtons = document.querySelectorAll('.operator');
+const equal = document.querySelector('.equal');
+const clear = document.querySelector('.clear');
 
 // Create operator functions.
 
@@ -37,22 +39,38 @@ function operate(a, b, operator) {
 numberButtons.forEach(button => button.addEventListener('click', () => {
     temp.push(button.getAttribute("value"));
     solutionDisplay.textContent = temp.join('');
-    console.log('numOne: ' + numOne, 'temp: ' + temp);
 }))
 
 operatorButtons.forEach(button => button.addEventListener('click', () => {
     changeVar(temp);
+    operator = button.getAttribute('value');
     operation.push(button.textContent);
-    operationDisplay.textContent = `${numOne.join('')} ${operation} ${numTwo.join('')}`;
+    operationDisplay.textContent = `${numOne} ${operation} ${numTwo}`;
     operation.splice(0);
+    console.log('numOne: ' + numOne, (typeof numOne));
 }))
 
+equal.addEventListener('click', function() {
+    if (numOne.length) {
+        numTwo = numTwo.concat(temp).join('');
+        console.log('numTwo: ' + numTwo, (typeof numTwo));
+        console.log('numOne: ' + numOne, 'numTwo: ' + numTwo,'operator: ' + operator);
+    }
+    solutionDisplay.textContent = operate(parseInt(numOne), parseInt(numTwo), operator)
+})
+
+// Functions
 function changeVar(item) {
     if (numOne.length) {
-        numTwo = numTwo.concat(item);
+        numTwo = numTwo.concat(item).join('');
         item.splice(0)
-        console.log('numTwo:' + numTwo)
     }
-    numOne = numOne.concat(item);
+    numOne = numOne.concat(item).join('');
     item.splice(0);
+}
+
+function clear() {
+    numOne = numOne.splice(0);
+    numTwo = numTwo.splice(0);
+    operator = operator.splice(0);
 }
