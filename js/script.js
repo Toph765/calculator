@@ -45,15 +45,20 @@ operatorButtons.forEach(button => button.addEventListener('click', () => {
     changeVar(temp);
     operation = button.textContent;
     operationDisplay.textContent = `${numOne.join('')} ${operation}`;
-    if (numOne.length) {
-        numTwo = numTwo.concat(temp);
-        temp.splice(0);
-    }
     if (numOne.length && numTwo.length) {
         answer.push(operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation));
         solutionDisplay.textContent = answer[answer.length - 1];
+        console.log('numOne and numTwo ' + true);
     }
-    if (answer.length) {}
+    if (answer.length) {
+        numOne = [];
+        numTwo = [];
+        numOne = numOne.concat(answer[answer.length - 1]);
+        operationDisplay.textContent = `${numOne[numOne.length - 1]} ${operation}`;
+        console.log(numOne)
+        console.log(numTwo)
+        console.log('answer: ' + answer)
+    }
 }))
 
 equal.addEventListener('click', function() {
