@@ -1,8 +1,8 @@
 let numOne = [];
 let numTwo = [];
 let temp = [];
+let answer = [];
 let operation = '';
-let operator = '';
 const operationDisplay = document.querySelector('.operationDisplay')
 const solutionDisplay = document.querySelector('.solutionDisplay');
 const numberButtons = document.querySelectorAll('.numerical');
@@ -29,10 +29,10 @@ function divide(a, b) {
 }
 
 function operate(a, b, operator) {
-    if (operator === "add") return add(a, b);
-    if (operator === "subtract") return subtract(a, b);
-    if (operator === "multiply") return multiply(a, b);
-    if (operator === "divide") return divide(a, b);
+    if (operator === "+") return add(a, b);
+    if (operator === "-") return subtract(a, b);
+    if (operator === "*") return multiply(a, b);
+    if (operator === "/") return divide(a, b);
 }
 
 // Button event listener
@@ -43,34 +43,35 @@ numberButtons.forEach(button => button.addEventListener('click', () => {
 
 operatorButtons.forEach(button => button.addEventListener('click', () => {
     changeVar(temp);
-    operator = button.getAttribute('value');
     operation = button.textContent;
-    operationDisplay.textContent = `${numOne} ${operation}`;
-    console.log('numOne: ' + numOne, (typeof numOne));
-    console.log('numOne: ' + numOne, 'numTwo: ' + numTwo,'operator: ' + operator);
+    operationDisplay.textContent = `${numOne.join('')} ${operation}`;
+    console.log('numOne: ' + numOne + typeof numOne, ', numTwo: ' + numTwo + typeof numTwo ,', operator: ' + operation);
 }))
 
 equal.addEventListener('click', function() {
     if (numOne.length) {
-        numTwo = numTwo.concat(temp).join('');
+        numTwo = numTwo.concat(temp);
         temp.splice(0);
-        console.log('numTwo: ' + numTwo, (typeof numTwo));
-        console.log('numOne: ' + numOne, 'numTwo: ' + numTwo,'operator: ' + operator);
     }
-    operationDisplay.textContent = `${numOne} ${operation} ${numTwo} =`;
-    solutionDisplay.textContent = operate(parseInt(numOne), parseInt(numTwo), operator);
+    operationDisplay.textContent = `${numOne.join('')} ${operation} ${numTwo.join('')} =`;
+    solutionDisplay.textContent = operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation);
+    clearVar();
+    console.log('numOne: ' + numOne + typeof numOne, ', numTwo: ' + numTwo + typeof numTwo ,', operator: ' + operation);
 })
 
-clear.addEventListener('click', clearVar);
+clear.addEventListener('click', () => {
+    clearVar();
+    clearDisplay();
+});
 
 
 // Functions
 function changeVar(item) {
     if (numOne.length) {
-        numTwo = numTwo.concat(item).join('');
+        numTwo = numTwo.concat(item);
         item.splice(0);
     }
-    numOne = numOne.concat(item).join('');
+    numOne = numOne.concat(item);
     item.splice(0);
 }
 
@@ -78,10 +79,15 @@ function clearVar() {
     numOne = [];
     numTwo = [];
     temp = [];
-    operator = '';
     operation = '';
+}
+
+function clearDisplay() {
     operationDisplay.textContent = '';
     solutionDisplay.textContent = '';
-    console.log(typeof numOne, typeof numTwo, typeof operator)
-    console.log(numOne, numTwo)
 }
+
+// CHECKER
+    /* console.log('numOne: ' + numOne, (typeof numOne));
+    console.log('numTwo: ' + numTwo, (typeof numTwo));
+    console.log('numOne: ' + numOne + typeof numOne, ', numTwo: ' + numTwo + typeof numTwo ,', operator: ' + operation); */
