@@ -2,7 +2,7 @@ let numOne = [];
 let numTwo = [];
 let temp = [];
 let answer = [];
-let operation = '';
+let operation = [];
 const operationDisplay = document.querySelector('.operationDisplay')
 const solutionDisplay = document.querySelector('.solutionDisplay');
 const numberButtons = document.querySelectorAll('.numerical');
@@ -35,7 +35,7 @@ function operate(a, b, operator) {
     if (operator === "/") return divide(a, b);
 }
 
-// Button event listener
+// EVENT LISTENERS
 numberButtons.forEach(button => button.addEventListener('click', () => {
     temp.push(button.getAttribute("value"));
     solutionDisplay.textContent = temp.join('');
@@ -43,21 +43,17 @@ numberButtons.forEach(button => button.addEventListener('click', () => {
 
 operatorButtons.forEach(button => button.addEventListener('click', () => {
     changeVar(temp);
-    operation = button.textContent;
-    operationDisplay.textContent = `${numOne.join('')} ${operation}`;
+    operation = operation.concat(button.textContent);
+    operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]}`;
     if (numOne.length && numTwo.length) {
-        answer.push(operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation));
+        answer.push(operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation[operation.length - 2]));
         solutionDisplay.textContent = answer[answer.length - 1];
-        console.log('numOne and numTwo ' + true);
     }
     if (answer.length) {
         numOne = [];
         numTwo = [];
         numOne = numOne.concat(answer[answer.length - 1]);
-        operationDisplay.textContent = `${numOne[numOne.length - 1]} ${operation}`;
-        console.log(numOne)
-        console.log(numTwo)
-        console.log('answer: ' + answer)
+        operationDisplay.textContent = `${numOne[numOne.length - 1]} ${operation[operation.length - 1]}`;
     }
 }))
 
@@ -75,7 +71,7 @@ clear.addEventListener('click', () => {
 });
 
 
-// Functions
+// FUNCTIONS
 function changeVar(item) {
     if (numOne.length) {
         numTwo = numTwo.concat(item);
@@ -90,7 +86,7 @@ function clearVar() {
     numTwo = [];
     temp = [];
     answer = [];
-    operation = '';
+    operation = [];
 }
 
 function clearDisplay() {
@@ -99,8 +95,8 @@ function clearDisplay() {
 }
 
 function execute() {
-    operationDisplay.textContent = `${numOne.join('')} ${operation} ${numTwo.join('')} =`;
-    answer.push(operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation));
+    operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]} ${numTwo.join('')} =`;
+    answer.push(operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation[operation.length - 1]));
     solutionDisplay.textContent = answer[answer.length - 1];
 }
 
