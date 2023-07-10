@@ -31,7 +31,7 @@ function divide(a, b) {
 function operate(a, b, operator) {
     if (operator === "+") return add(a, b);
     if (operator === "-") return subtract(a, b);
-    if (operator === "*") return multiply(a, b);
+    if (operator === "x") return multiply(a, b);
     if (operator === "/") return divide(a, b);
 }
 
@@ -45,7 +45,15 @@ operatorButtons.forEach(button => button.addEventListener('click', () => {
     changeVar(temp);
     operation = button.textContent;
     operationDisplay.textContent = `${numOne.join('')} ${operation}`;
-    console.log('numOne: ' + numOne + typeof numOne, ', numTwo: ' + numTwo + typeof numTwo ,', operator: ' + operation);
+    if (numOne.length) {
+        numTwo = numTwo.concat(temp);
+        temp.splice(0);
+    }
+    if (numOne.length && numTwo.length) {
+        answer.push(operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation));
+        solutionDisplay.textContent = answer[answer.length - 1];
+    }
+    if (answer.length) {}
 }))
 
 equal.addEventListener('click', function() {
@@ -53,10 +61,7 @@ equal.addEventListener('click', function() {
         numTwo = numTwo.concat(temp);
         temp.splice(0);
     }
-    operationDisplay.textContent = `${numOne.join('')} ${operation} ${numTwo.join('')} =`;
-    solutionDisplay.textContent = operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation);
-    clearVar();
-    console.log('numOne: ' + numOne + typeof numOne, ', numTwo: ' + numTwo + typeof numTwo ,', operator: ' + operation);
+    execute();
 })
 
 clear.addEventListener('click', () => {
@@ -79,12 +84,19 @@ function clearVar() {
     numOne = [];
     numTwo = [];
     temp = [];
+    answer = [];
     operation = '';
 }
 
 function clearDisplay() {
     operationDisplay.textContent = '';
     solutionDisplay.textContent = '';
+}
+
+function execute() {
+    operationDisplay.textContent = `${numOne.join('')} ${operation} ${numTwo.join('')} =`;
+    answer.push(operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation));
+    solutionDisplay.textContent = answer[answer.length - 1];
 }
 
 // CHECKER
