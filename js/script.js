@@ -1,21 +1,30 @@
 let numOne = [];
 let numTwo = [];
-let temp = [];
+let temp = [0];
 let answer = [];
 let operation = [];
 const operationDisplay = document.querySelector('.operationDisplay')
 const solutionDisplay = document.querySelector('.solutionDisplay');
 const numberButtons = document.querySelectorAll('.numerical');
 const operatorButtons = document.querySelectorAll('.operator');
+const point = document.querySelector('.point');
 const equal = document.querySelector('.equal');
 const clear = document.querySelector('.clear');
+
+solutionDisplay.textContent = [temp]
 
 // Create operator functions.
 
 const add = (a, b) => {return a + b};
 const subtract = (a, b) => {return a - b};
 const multiply = (a, b) => {return a * b};
-const divide = (a, b) => {return a / b};
+const divide = (a, b) => {
+    if (b === 0) {
+        alert(`I don't have enough braincells to compute this!`);
+        clearVar();
+        clearDisplay();
+    }
+    return a / b;};
 
 function operate(a, b, operator) {
     if (operator === "+") return add(a, b);
@@ -26,16 +35,23 @@ function operate(a, b, operator) {
 
 // EVENT LISTENERS
 numberButtons.forEach(button => button.addEventListener('click', () => {
+    if (temp[0] === 0 && temp.length === 1) temp.splice(0);
     temp.push(button.textContent);
     solutionDisplay.textContent = temp.join('');
 }))
+
+point.addEventListener('click', () => {
+    if (temp.includes('.')) return;
+    temp.push(point.textContent);
+    solutionDisplay.textContent = temp.join('');
+})
 
 operatorButtons.forEach(button => button.addEventListener('click', () => {
     changeVar(temp);
     operation = operation.concat(button.textContent);
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]}`;
     if (numOne.length && numTwo.length) {
-        answer.push(operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation[operation.length - 2]));
+        answer.push(operate(parseFloat(numOne.join('')), parseFloat(numTwo.join('')), operation[operation.length - 2]));
         solutionDisplay.textContent = answer[answer.length - 1];
     }
     if (answer.length) {
@@ -73,19 +89,19 @@ function changeVar(item) {
 function clearVar() {
     numOne = [];
     numTwo = [];
-    temp = [];
+    temp = [0];
     answer = [];
     operation = [];
 }
 
 function clearDisplay() {
     operationDisplay.textContent = '';
-    solutionDisplay.textContent = '';
+    solutionDisplay.textContent = temp;
 }
 
 function execute() {
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]} ${numTwo.join('')} =`;
-    answer.push(operate(parseInt(numOne.join('')), parseInt(numTwo.join('')), operation[operation.length - 1]));
+    answer.push(operate(parseFloat(numOne.join('')), parseFloat(numTwo.join('')), operation[operation.length - 1]));
     solutionDisplay.textContent = answer[answer.length - 1];
 }
 
