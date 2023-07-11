@@ -12,21 +12,10 @@ const clear = document.querySelector('.clear');
 
 // Create operator functions.
 
-function add(a, b) {
-    return a + b
-}
-
-function subtract(a, b) {
-    return a - b
-}
-
-function multiply(a, b) {
-    return a * b
-}
-
-function divide(a, b) {
-    return a / b
-}
+const add = (a, b) => {return a + b};
+const subtract = (a, b) => {return a - b};
+const multiply = (a, b) => {return a * b};
+const divide = (a, b) => {return a / b};
 
 function operate(a, b, operator) {
     if (operator === "+") return add(a, b);
@@ -37,7 +26,7 @@ function operate(a, b, operator) {
 
 // EVENT LISTENERS
 numberButtons.forEach(button => button.addEventListener('click', () => {
-    temp.push(button.getAttribute("value"));
+    temp.push(button.textContent);
     solutionDisplay.textContent = temp.join('');
 }))
 
@@ -103,4 +92,4 @@ function execute() {
 // CHECKER
     /* console.log('numOne: ' + numOne, (typeof numOne));
     console.log('numTwo: ' + numTwo, (typeof numTwo));
-    console.log('numOne: ' + numOne + typeof numOne, ', numTwo: ' + numTwo + typeof numTwo ,', operator: ' + operation); */
+    console.log('numOne: ' + numOne + ' ' + typeof numOne, ', numTwo: ' + numTwo + ' ' +  typeof numTwo ,', operator: ' + operation); */
