@@ -40,11 +40,7 @@ numberButtons.forEach(button => button.addEventListener('click', () => {
     solutionDisplay.textContent = temp.join('');
 }))
 
-point.addEventListener('click', () => {
-    if (temp.includes('.')) return;
-    temp.push(point.textContent);
-    solutionDisplay.textContent = temp.join('');
-})
+point.addEventListener('click', addPoint);
 
 operatorButtons.forEach(button => button.addEventListener('click', () => {
     changeVar(temp);
@@ -84,6 +80,12 @@ function changeVar(item) {
     }
     numOne = numOne.concat(item);
     item.splice(0);
+}
+
+function addPoint() {
+    if (temp.includes('.')) return;
+    temp.push(point.textContent);
+    solutionDisplay.textContent = temp.join('');
 }
 
 function clearVar() {
