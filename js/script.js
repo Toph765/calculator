@@ -65,6 +65,7 @@ equal.addEventListener('click', function() {
         temp.splice(0);
     }
     executeOperation();
+    clearVar();
 })
 
 clear.addEventListener('click', () => {
@@ -72,7 +73,7 @@ clear.addEventListener('click', () => {
     clearDisplay();
 });
 
-backSpace.addEventListener('click', backspace)
+backSpace.addEventListener('click', backspace);
 
 // FUNCTIONS
 function changeVar(item) {
@@ -116,6 +117,5 @@ function backspace() {
 function executeOperation() {
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]} ${numTwo.join('')} =`;
     answer.push(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 1]));
-    console.log(numOne, numTwo);
     solutionDisplay.textContent = answer[answer.length - 1];
 }
