@@ -91,7 +91,7 @@ function addPoint() {
 }
 
 function turnToNumber(array) {
-    return parseFloat(array.join());
+    return parseFloat(array.join(''));
 }
 
 function clearVar() {
