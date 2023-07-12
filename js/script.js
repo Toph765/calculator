@@ -10,6 +10,7 @@ const operatorButtons = document.querySelectorAll('.operator');
 const point = document.querySelector('.point');
 const equal = document.querySelector('.equal');
 const clear = document.querySelector('.clear');
+const backSpace = document.querySelector('.backspace');
 
 solutionDisplay.textContent = [temp]
 
@@ -71,6 +72,7 @@ clear.addEventListener('click', () => {
     clearDisplay();
 });
 
+backSpace.addEventListener('click', backspace)
 
 // FUNCTIONS
 function changeVar(item) {
@@ -99,6 +101,12 @@ function clearVar() {
 function clearDisplay() {
     operationDisplay.textContent = '';
     solutionDisplay.textContent = temp;
+}
+
+function backspace() {
+    if (temp[0] === 0) return;
+    temp.pop();
+    solutionDisplay.textContent = temp.join('');
 }
 
 function execute() {
