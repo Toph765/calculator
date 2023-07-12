@@ -48,7 +48,7 @@ operatorButtons.forEach(button => button.addEventListener('click', () => {
     operation = operation.concat(button.textContent);
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]}`;
     if (numOne.length && numTwo.length) {
-        answer.push(operate(parseFloat(numOne.join('')), parseFloat(numTwo.join('')), operation[operation.length - 2]));
+        answer.push(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 2]));
         solutionDisplay.textContent = answer[answer.length - 1];
     }
     if (answer.length) {
@@ -64,7 +64,7 @@ equal.addEventListener('click', function() {
         numTwo = numTwo.concat(temp);
         temp.splice(0);
     }
-    execute();
+    executeOperation();
 })
 
 clear.addEventListener('click', () => {
@@ -90,6 +90,10 @@ function addPoint() {
     solutionDisplay.textContent = temp.join('');
 }
 
+function turnToNumber(array) {
+    return parseFloat(array.join());
+}
+
 function clearVar() {
     numOne = [];
     numTwo = [];
@@ -109,13 +113,9 @@ function backspace() {
     solutionDisplay.textContent = temp.join('');
 }
 
-function execute() {
+function executeOperation() {
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]} ${numTwo.join('')} =`;
-    answer.push(operate(parseFloat(numOne.join('')), parseFloat(numTwo.join('')), operation[operation.length - 1]));
+    answer.push(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 1]));
+    console.log(numOne, numTwo);
     solutionDisplay.textContent = answer[answer.length - 1];
 }
-
-// CHECKER
-    /* console.log('numOne: ' + numOne, (typeof numOne));
-    console.log('numTwo: ' + numTwo, (typeof numTwo));
-    console.log('numOne: ' + numOne + ' ' + typeof numOne, ', numTwo: ' + numTwo + ' ' +  typeof numTwo ,', operator: ' + operation); */
