@@ -3,6 +3,7 @@ let numTwo = [];
 let temp = [0];
 let answer = [];
 let operation = [];
+
 const operationDisplay = document.querySelector('.operationDisplay')
 const solutionDisplay = document.querySelector('.solutionDisplay');
 const numberButtons = document.querySelectorAll('.numerical');
@@ -13,8 +14,6 @@ const clear = document.querySelector('.clear');
 const backSpace = document.querySelector('.backspace');
 
 solutionDisplay.textContent = [temp]
-
-// Create operator functions.
 
 const add = (a, b) => {return a + b};
 const subtract = (a, b) => {return a - b};
@@ -35,45 +34,16 @@ function operate(a, b, operator) {
 }
 
 // EVENT LISTENERS
-numberButtons.forEach(button => button.addEventListener('click', () => {
-    if (temp[0] === 0 && temp.length === 1) temp.splice(0);
-    temp.push(button.textContent);
-    solutionDisplay.textContent = temp.join('');
-}))
-
+operatorButtons.forEach(button => button.addEventListener('click', () => {inputOperator(button)}));
+numberButtons.forEach(button => button.addEventListener('click', () => {inputNumber(button)}));
 point.addEventListener('click', addPoint);
-
-operatorButtons.forEach(button => button.addEventListener('click', () => {
-    changeVar(temp);
-    operation = operation.concat(button.textContent);
-    operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]}`;
-    if (numOne.length && numTwo.length) {
-        answer.push(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 2]));
-        solutionDisplay.textContent = answer[answer.length - 1];
-    }
-    if (answer.length) {
-        numOne = [];
-        numTwo = [];
-        numOne = numOne.concat(answer[answer.length - 1]);
-        operationDisplay.textContent = `${numOne[numOne.length - 1]} ${operation[operation.length - 1]}`;
-    }
-}))
-
-equal.addEventListener('click', function() {
-    if (numOne.length) {
-        numTwo = numTwo.concat(temp);
-        temp.splice(0);
-    }
-    executeOperation();
-    clearVar();
-})
-
-clear.addEventListener('click', () => {
-    clearVar();
-    clearDisplay();
-});
-
+equal.addEventListener('click', evaluate);
+clear.addEventListener('click', clearAll);
 backSpace.addEventListener('click', backspace);
+
+// KEYBOARD FUNCTIONALITY
+
+window.addEventListener('keydown', handleKeyboard);
 
 // FUNCTIONS
 function changeVar(item) {
@@ -108,6 +78,11 @@ function clearDisplay() {
     solutionDisplay.textContent = temp;
 }
 
+function clearAll() {
+    clearVar();
+    clearDisplay();
+}
+
 function backspace() {
     if (temp[0] === 0) return;
     temp.pop();
@@ -118,4 +93,48 @@ function executeOperation() {
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]} ${numTwo.join('')} =`;
     answer.push(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 1]));
     solutionDisplay.textContent = answer[answer.length - 1];
+}
+
+function inputNumber(button) {
+    if (temp[0] === 0 && temp.length === 1) temp.splice(0);
+    temp.push(button.textContent);
+    solutionDisplay.textContent = temp.join('');
+}
+
+function inputOperator(button) {
+    changeVar(temp);
+    operation = operation.concat(button.textContent);
+    operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]}`;
+    if (numOne.length && numTwo.length) {
+        answer.push(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 2]));
+        solutionDisplay.textContent = answer[answer.length - 1];
+    }
+    if (answer.length) {
+        numOne = [];
+        numTwo = [];
+        numOne = numOne.concat(answer[answer.length - 1]);
+        operationDisplay.textContent = `${numOne[numOne.length - 1]} ${operation[operation.length - 1]}`;
+    }
+}
+
+function evaluate() {
+    if (temp.length && numOne.length) {
+        numTwo = numTwo.concat(temp);
+        temp.splice(0);
+    }
+    if (!numTwo.length) return;
+    executeOperation();
+    clearVar();
+}
+
+function handleKeyboard(event) {
+    const numButton = document.querySelector(`.numerical[data-key='${event.code}']`);
+    const opButton = document.querySelector(`.operator[data-key='${event.code}']`);
+    if (event.key >= 0 && event.key <= 9) inputNumber(numButton);
+    if (event.key === '=' || event.key === 'Enter') evaluate();
+    if (event.key === '.') addPoint();
+    if (event.key === 'Escape') clearAll();
+    if (event.key === 'Backspace') backspace();
+    if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') 
+    inputOperator(opButton);
 }
