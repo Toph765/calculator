@@ -42,16 +42,7 @@ equal.addEventListener('click', evaluate);
 clear.addEventListener('click', clearAll);
 backSpace.addEventListener('click', backspace);
 
-percentage.addEventListener('click', () => {
-    if (answer.length) {
-        let percent = findPercentage(answer[answer.length - 1]);
-        solutionDisplay.textContent = percent
-    } else { 
-    let percent = findPercentage(temp.join(''));
-    numOne = numOne.concat(percent);
-    temp.splice(0);
-    solutionDisplay.textContent = percent};
-})
+percentage.addEventListener('click', evaluatePercentile);
 
 // KEYBOARD FUNCTIONALITY
 
@@ -60,6 +51,30 @@ window.addEventListener('keydown', handleKeyboard);
 // FUNCTIONS
 function findPercentage(a) {
     return a / 100;
+}
+
+function evaluatePercentile() {
+    let percent;
+    if (answer.length) {
+        percent = findPercentage(answer[answer.length - 1]);
+        answer = answer.concat(percent);
+        solutionDisplay.textContent = percent
+    } else if (numOne.length && !operation.length) {
+        percent = findPercentage(numOne[numOne.length - 1]);
+        numOne = numOne.concat(percent);
+        numOne.splice(0, numOne.length - 1);
+        solutionDisplay.textContent = numOne[numOne.length - 1];
+    } else if (numOne.length && operation.length) {
+        percent = findPercentage(temp.join(''));
+        numTwo = numTwo.concat(percent);
+        temp.splice(0);
+        solutionDisplay.textContent = numTwo[0]
+    } else { 
+        percent = findPercentage(temp.join(''));
+        numOne = numOne.concat(percent);
+        temp.splice(0);
+        solutionDisplay.textContent = numOne[0]};
+    console.log(numOne, operation)
 }
 
 function changeVar(item) {
