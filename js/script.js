@@ -12,6 +12,7 @@ const point = document.querySelector('.point');
 const equal = document.querySelector('.equal');
 const clear = document.querySelector('.clear');
 const backSpace = document.querySelector('.backspace');
+const percentage = document.querySelector('.percentage');
 
 solutionDisplay.textContent = [temp]
 
@@ -46,6 +47,10 @@ backSpace.addEventListener('click', backspace);
 window.addEventListener('keydown', handleKeyboard);
 
 // FUNCTIONS
+function findPercentage(a) {
+    return a / 100;
+}
+
 function changeVar(item) {
     if (numOne.length) {
         numTwo = numTwo.concat(item);
