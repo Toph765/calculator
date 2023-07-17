@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.container {
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 4px black;
+}
+
+.display {
+    width: 400px;
+    height: 100px;
+    border: solid 2px black;
+    display: flex;
+    flex-direction: column;
+}
+
+.operationDisplay {
+    height: 40px;
+    border-bottom: solid 2px black;
+}
+
+.solutionDisplay {
+    text-align: end;
+}
+
+.buttons {
+    display: grid;
+}
