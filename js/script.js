@@ -42,6 +42,17 @@ equal.addEventListener('click', evaluate);
 clear.addEventListener('click', clearAll);
 backSpace.addEventListener('click', backspace);
 
+percentage.addEventListener('click', () => {
+    if (answer.length) {
+        let percent = findPercentage(answer[answer.length - 1]);
+        solutionDisplay.textContent = percent
+    } else { 
+    let percent = findPercentage(temp.join(''));
+    numOne = numOne.concat(percent);
+    temp.splice(0);
+    solutionDisplay.textContent = percent};
+})
+
 // KEYBOARD FUNCTIONALITY
 
 window.addEventListener('keydown', handleKeyboard);
@@ -74,7 +85,6 @@ function clearVar() {
     numOne = [];
     numTwo = [];
     temp = [0];
-    answer = [];
     operation = [];
 }
 
@@ -86,6 +96,7 @@ function clearDisplay() {
 function clearAll() {
     clearVar();
     clearDisplay();
+    answer = [];
 }
 
 function backspace() {
