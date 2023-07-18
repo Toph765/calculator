@@ -63,18 +63,23 @@ function evaluatePercentile() {
         percent = findPercentage(numOne[numOne.length - 1]);
         numOne = numOne.concat(percent);
         numOne.splice(0, numOne.length - 1);
-        solutionDisplay.textContent = numOne[numOne.length - 1];
-    } else if (numOne.length && operation.length) {
+        solutionDisplay.textContent = numOne[0];
+    } else if (numOne.length && operation.length && !numTwo.length) {
         percent = findPercentage(temp.join(''));
         numTwo = numTwo.concat(percent);
         temp.splice(0);
         solutionDisplay.textContent = numTwo[0]
+    } else if (numTwo.length) {
+        percent = findPercentage(numTwo[numTwo.length - 1]);
+        numTwo = numTwo.concat(percent);
+        numTwo.splice(0, numTwo.length - 1);
+        solutionDisplay.textContent = numTwo[0];
     } else { 
         percent = findPercentage(temp.join(''));
         numOne = numOne.concat(percent);
         temp.splice(0);
         solutionDisplay.textContent = numOne[0]};
-    console.log(numOne, operation)
+    console.log(numTwo.length)
 }
 
 function changeVar(item) {
@@ -128,6 +133,7 @@ function executeOperation() {
 
 function inputNumber(button) {
     if (temp[0] === 0 && temp.length === 1) temp.splice(0);
+    if (answer.length) answer = [];
     temp.push(button.textContent);
     solutionDisplay.textContent = temp.join('');
 }
