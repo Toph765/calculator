@@ -79,7 +79,6 @@ function evaluatePercentile() {
         numOne = numOne.concat(percent);
         temp.splice(0);
         solutionDisplay.textContent = numOne[0]};
-    console.log(numTwo.length)
 }
 
 function changeVar(item) {
