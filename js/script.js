@@ -121,13 +121,21 @@ function backspace() {
     solutionDisplay.textContent = temp.join('');
 }
 
+function displayAnswer() {
+    if (answer[answer.length - 1] > 99999999999) {
+        solutionDisplay.textContent = answer[answer.length - 1].toExponential(2);
+    } else {
+    solutionDisplay.textContent = answer[answer.length - 1]};
+}
+
 function executeOperation() {
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]} ${numTwo.join('')} =`;
     answer.push(Math.round(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 1]) * (100000 ** 2)) / (100000 ** 2));
-    solutionDisplay.textContent = answer[answer.length - 1];
+    displayAnswer();
 }
 
 function inputNumber(button) {
+    if (temp.length == 11) return;
     if (temp[0] === 0 && temp.length === 1) temp.splice(0);
     if (answer.length) answer = [];
     temp.push(button.textContent);
@@ -140,7 +148,7 @@ function inputOperator(button) {
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]}`;
     if (numOne.length && numTwo.length) {
         answer.push(Math.round(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 2]) * (100000 ** 2)) / (100000 ** 2));
-        solutionDisplay.textContent = answer[answer.length - 1];
+        displayAnswer();
     }
     if (answer.length) {
         numOne = [];
