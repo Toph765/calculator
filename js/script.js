@@ -41,7 +41,6 @@ point.addEventListener('click', addPoint);
 equal.addEventListener('click', evaluate);
 clear.addEventListener('click', clearAll);
 backSpace.addEventListener('click', backspace);
-
 percentage.addEventListener('click', evaluatePercentile);
 
 // KEYBOARD FUNCTIONALITY
@@ -54,31 +53,29 @@ function findPercentage(a) {
 }
 
 function evaluatePercentile() {
-    let percent;
     if (answer.length) {
-        percent = findPercentage(answer[answer.length - 1]);
+        let percent = findPercentage(answer[answer.length - 1]);
         answer = answer.concat(percent);
         solutionDisplay.textContent = percent
-    } else if (numOne.length && !operation.length) {
-        percent = findPercentage(numOne[numOne.length - 1]);
-        numOne = numOne.concat(percent);
-        numOne.splice(0, numOne.length - 1);
-        solutionDisplay.textContent = numOne[0];
-    } else if (numOne.length && operation.length && !numTwo.length) {
+    } else if (numOne.length && !operation.length) {evalPercentVar(numOne)} 
+    else if (numOne.length && operation.length && !numTwo.length) {evalPercentVar(numTwo)} 
+    else if (numTwo.length) {evalPercentVar(numTwo)} 
+    else { evalPercentVar(numOne)};
+}
+
+
+function evalPercentVar(array) {
+    let percent;
+    if (temp.length) {
         percent = findPercentage(temp.join(''));
-        numTwo = numTwo.concat(percent);
+        array.push(percent);
         temp.splice(0);
-        solutionDisplay.textContent = numTwo[0]
-    } else if (numTwo.length) {
-        percent = findPercentage(numTwo[numTwo.length - 1]);
-        numTwo = numTwo.concat(percent);
-        numTwo.splice(0, numTwo.length - 1);
-        solutionDisplay.textContent = numTwo[0];
-    } else { 
-        percent = findPercentage(temp.join(''));
-        numOne = numOne.concat(percent);
-        temp.splice(0);
-        solutionDisplay.textContent = numOne[0]};
+    } else {
+        percent = findPercentage(array[array.length - 1]);
+        array.push(percent);
+        array.splice(0, array.length - 1);
+    }
+    solutionDisplay.textContent = array[0];
 }
 
 function changeVar(item) {
@@ -171,6 +168,6 @@ function handleKeyboard(event) {
     if (event.key === '.') addPoint();
     if (event.key === 'Escape') clearAll();
     if (event.key === 'Backspace') backspace();
-    if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') 
+    if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/');
     inputOperator(opButton);
 }
