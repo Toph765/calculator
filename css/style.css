@@ -55,6 +55,7 @@ body {
     border: solid 2px black;
 }
 
-/* .equal {
-
-} */
+.equal {
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
