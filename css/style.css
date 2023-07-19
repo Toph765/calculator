@@ -32,11 +32,18 @@ body {
 
 .operationDisplay {
     height: 40px;
+    width: 300px;
     border-bottom: solid 2px black;
 }
 
 .solutionDisplay {
-    text-align: end;
+    font-size: 50px;
+    height: 60px;
+    width: 300px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 8px;
 }
 
 .buttons {
