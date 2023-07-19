@@ -168,6 +168,6 @@ function handleKeyboard(event) {
     if (event.key === '.') addPoint();
     if (event.key === 'Escape') clearAll();
     if (event.key === 'Backspace') backspace();
-    if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/');
+    if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/')
     inputOperator(opButton);
 }
