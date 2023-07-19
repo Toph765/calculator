@@ -33,7 +33,6 @@ body {
 .operationDisplay {
     height: 40px;
     width: 300px;
-    border-bottom: solid 2px black;
 }
 
 .solutionDisplay {
@@ -63,6 +62,5 @@ body {
 }
 
 .equal {
-    grid-column-start: 3;
-    grid-column-end: 5;
+    grid-column: span 2;
 }
