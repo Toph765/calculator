@@ -123,7 +123,7 @@ function backspace() {
 
 function executeOperation() {
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]} ${numTwo.join('')} =`;
-    answer.push(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 1]));
+    answer.push(Math.round(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 1]) * (100000 ** 2)) / (100000 ** 2));
     solutionDisplay.textContent = answer[answer.length - 1];
 }
 
@@ -139,7 +139,7 @@ function inputOperator(button) {
     operation = operation.concat(button.textContent);
     operationDisplay.textContent = `${numOne.join('')} ${operation[operation.length - 1]}`;
     if (numOne.length && numTwo.length) {
-        answer.push(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 2]));
+        answer.push(Math.round(operate(turnToNumber(numOne), turnToNumber(numTwo), operation[operation.length - 2]) * (100000 ** 2)) / (100000 ** 2));
         solutionDisplay.textContent = answer[answer.length - 1];
     }
     if (answer.length) {
