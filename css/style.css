@@ -7,6 +7,7 @@
 }
 
 body {
+    background-color: #F8EDE3;
     display: flex;
     justify-content: center;
     margin-top: 20px;
@@ -20,9 +21,11 @@ body {
     align-items: center;
     border: solid 4px black;
     border-radius: 20px;
+    background-color: #665A48;
 }
 
 .display {
+    background-color: #C8DBBE;
     width: 300px;
     height: 100px;
     border: solid 2px black;
@@ -33,6 +36,7 @@ body {
 }
 
 .operationDisplay {
+    color: #4d4336;
     font-size: 15px;
     font-family: 'Tektur', cursive;
     height: 40px;
@@ -41,6 +45,7 @@ body {
 }
 
 .solutionDisplay {
+    color: #4d4336;
     font-size: 40px;
     font-family: 'Tektur', cursive;
     height: 60px;
@@ -69,6 +74,47 @@ body {
     font-family: 'Tektur', cursive;
 }
 
+.numerical {
+    background-color: #7286D3;
+}
+
+.numerical:active {
+    background-color: #97a3d4;
+}
+
+.operator {
+    background-color: #FAAB78;
+}
+
+.operator:active {
+    background-color: #fac099;
+}
+
+.point, 
+.percentage {
+    background-color: #F2D388;
+}
+
+.point:active,
+.percentage:active {
+    background-color: #f5e3bb;
+}
+
+.clear,
+.backspace {
+    background-color: #E97777;
+}
+
+.clear:active,
+.backspace:active {
+    background-color: #e79a9a;
+}
+
 .equal {
+    background-color: #90C8AC;
     grid-column: span 2;
+}
+
+.equal:active {
+    background-color: #b8dac9;
 }
