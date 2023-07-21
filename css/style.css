@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Tektur&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -31,12 +33,16 @@ body {
 }
 
 .operationDisplay {
+    font-size: 15px;
+    font-family: 'Tektur', cursive;
     height: 40px;
     width: 300px;
+    padding-left: 8px;
 }
 
 .solutionDisplay {
-    font-size: 50px;
+    font-size: 40px;
+    font-family: 'Tektur', cursive;
     height: 60px;
     width: 300px;
     display: flex;
@@ -59,6 +65,8 @@ body {
 .btnStyle {
     border-radius: 10px;
     border: solid 2px black;
+    font-size: 14px;
+    font-family: 'Tektur', cursive;
 }
 
 .equal {
